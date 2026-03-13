@@ -6,7 +6,9 @@ public class Player : MonoBehaviour
 
     // public fields with certain primitive types allow the type 
     // to appear in the inspector allowing on the fly modification
-    public float speed = 0.03f; 
+    public float speed = 0.03f;
+
+    private const float Y_LIMIT = 4.6f; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,5 +38,20 @@ public class Player : MonoBehaviour
         {
             this.transform.Translate(Vector3.down * speed); 
         }
+
+
+        // clamping the player's position to keep them within screen bounds 
+        // value is currently hard coded 
+        if(this.transform.position.y > Y_LIMIT)
+        {
+            this.transform.position = new Vector3(0.0f, Y_LIMIT, 0.0f);
+        }
+
+        if (this.transform.position.y < -Y_LIMIT)
+        {
+            this.transform.position = new Vector3(0.0f, -Y_LIMIT, 0.0f);
+
+        }
+
     }
 }

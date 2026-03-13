@@ -118,6 +118,24 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4ce5ee9-47b6-4b9f-9063-89232391736b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""4b3c8991-cd74-411c-95dd-4d3c1c0a7c4d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -175,6 +193,50 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9d463f6-f42c-480d-985e-adb664769ef9"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59b44a29-4240-4ff3-b2cc-f89f4804e8ea"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a22b2d7-0f25-437b-8874-5e579c342789"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a26725b-4e67-4568-93f8-9972cac2698c"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -186,6 +248,8 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
         m_Standard_MoveUp = m_Standard.FindAction("MoveUp", throwIfNotFound: true);
         m_Standard_MoveDown = m_Standard.FindAction("MoveDown", throwIfNotFound: true);
         m_Standard_Fire = m_Standard.FindAction("Fire", throwIfNotFound: true);
+        m_Standard_MoveLeft = m_Standard.FindAction("MoveLeft", throwIfNotFound: true);
+        m_Standard_MoveRight = m_Standard.FindAction("MoveRight", throwIfNotFound: true);
     }
 
     ~@SpaceShooterInputs()
@@ -269,6 +333,8 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Standard_MoveUp;
     private readonly InputAction m_Standard_MoveDown;
     private readonly InputAction m_Standard_Fire;
+    private readonly InputAction m_Standard_MoveLeft;
+    private readonly InputAction m_Standard_MoveRight;
     /// <summary>
     /// Provides access to input actions defined in input action map "Standard".
     /// </summary>
@@ -292,6 +358,14 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Standard/Fire".
         /// </summary>
         public InputAction @Fire => m_Wrapper.m_Standard_Fire;
+        /// <summary>
+        /// Provides access to the underlying input action "Standard/MoveLeft".
+        /// </summary>
+        public InputAction @MoveLeft => m_Wrapper.m_Standard_MoveLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "Standard/MoveRight".
+        /// </summary>
+        public InputAction @MoveRight => m_Wrapper.m_Standard_MoveRight;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -327,6 +401,12 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @MoveLeft.started += instance.OnMoveLeft;
+            @MoveLeft.performed += instance.OnMoveLeft;
+            @MoveLeft.canceled += instance.OnMoveLeft;
+            @MoveRight.started += instance.OnMoveRight;
+            @MoveRight.performed += instance.OnMoveRight;
+            @MoveRight.canceled += instance.OnMoveRight;
         }
 
         /// <summary>
@@ -347,6 +427,12 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @MoveLeft.started -= instance.OnMoveLeft;
+            @MoveLeft.performed -= instance.OnMoveLeft;
+            @MoveLeft.canceled -= instance.OnMoveLeft;
+            @MoveRight.started -= instance.OnMoveRight;
+            @MoveRight.performed -= instance.OnMoveRight;
+            @MoveRight.canceled -= instance.OnMoveRight;
         }
 
         /// <summary>
@@ -408,5 +494,19 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnFire(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MoveLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMoveLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MoveRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMoveRight(InputAction.CallbackContext context);
     }
 }

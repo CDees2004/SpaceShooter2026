@@ -93,24 +93,6 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
             ""id"": ""5d70ff9b-68a6-44b5-913f-ac7c4899c1b4"",
             ""actions"": [
                 {
-                    ""name"": ""MoveUp"",
-                    ""type"": ""Button"",
-                    ""id"": ""138d3d30-c035-4063-a891-2e29d424b19e"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""MoveDown"",
-                    ""type"": ""Button"",
-                    ""id"": ""9c6a5744-8887-414d-9686-14ea69c947c0"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Fire"",
                     ""type"": ""Button"",
                     ""id"": ""2a7a7907-dcd3-4c70-b440-c26b584bbf4d"",
@@ -136,53 +118,27 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shield"",
+                    ""type"": ""Button"",
+                    ""id"": ""55118a9f-9bf4-4507-8ccf-f3b4bd34d75b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveVertically"",
+                    ""type"": ""Button"",
+                    ""id"": ""da1918ca-f857-4b6a-8b26-003017fe8bfa"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""795c3f4b-189a-4a80-a830-0bb823aa9355"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4a975df6-4326-47a9-8a77-e8717ba11100"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f84a8dd5-eede-492c-b8b5-154e4ad9192d"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveDown"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""75adf421-a9c5-44c8-add5-45fa32ffb888"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveDown"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""1906aa86-d012-474c-afa3-1de1bd961d32"",
@@ -237,6 +193,83 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
                     ""action"": ""MoveRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed7fb139-0a71-443b-a532-1ebdbfec206c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""feb698a5-c0f4-4621-8157-5b31a5087789"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveVertically"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""2b6d8b2b-1ffb-47a7-b82f-e0d9b9b485a4"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveVertically"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""7733edbb-d9e4-4590-8a25-49e92a0f5af9"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveVertically"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""9f7e3840-604e-4627-9330-e29016f6a821"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveVertically"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""78e06c59-f328-4ecb-9786-770421050585"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveVertically"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""27209823-04f5-41e8-ad30-ee4516918eee"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveVertically"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -245,11 +278,11 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
 }");
         // Standard
         m_Standard = asset.FindActionMap("Standard", throwIfNotFound: true);
-        m_Standard_MoveUp = m_Standard.FindAction("MoveUp", throwIfNotFound: true);
-        m_Standard_MoveDown = m_Standard.FindAction("MoveDown", throwIfNotFound: true);
         m_Standard_Fire = m_Standard.FindAction("Fire", throwIfNotFound: true);
         m_Standard_MoveLeft = m_Standard.FindAction("MoveLeft", throwIfNotFound: true);
         m_Standard_MoveRight = m_Standard.FindAction("MoveRight", throwIfNotFound: true);
+        m_Standard_Shield = m_Standard.FindAction("Shield", throwIfNotFound: true);
+        m_Standard_MoveVertically = m_Standard.FindAction("MoveVertically", throwIfNotFound: true);
     }
 
     ~@SpaceShooterInputs()
@@ -330,11 +363,11 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
     // Standard
     private readonly InputActionMap m_Standard;
     private List<IStandardActions> m_StandardActionsCallbackInterfaces = new List<IStandardActions>();
-    private readonly InputAction m_Standard_MoveUp;
-    private readonly InputAction m_Standard_MoveDown;
     private readonly InputAction m_Standard_Fire;
     private readonly InputAction m_Standard_MoveLeft;
     private readonly InputAction m_Standard_MoveRight;
+    private readonly InputAction m_Standard_Shield;
+    private readonly InputAction m_Standard_MoveVertically;
     /// <summary>
     /// Provides access to input actions defined in input action map "Standard".
     /// </summary>
@@ -347,14 +380,6 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
         /// </summary>
         public StandardActions(@SpaceShooterInputs wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Standard/MoveUp".
-        /// </summary>
-        public InputAction @MoveUp => m_Wrapper.m_Standard_MoveUp;
-        /// <summary>
-        /// Provides access to the underlying input action "Standard/MoveDown".
-        /// </summary>
-        public InputAction @MoveDown => m_Wrapper.m_Standard_MoveDown;
-        /// <summary>
         /// Provides access to the underlying input action "Standard/Fire".
         /// </summary>
         public InputAction @Fire => m_Wrapper.m_Standard_Fire;
@@ -366,6 +391,14 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Standard/MoveRight".
         /// </summary>
         public InputAction @MoveRight => m_Wrapper.m_Standard_MoveRight;
+        /// <summary>
+        /// Provides access to the underlying input action "Standard/Shield".
+        /// </summary>
+        public InputAction @Shield => m_Wrapper.m_Standard_Shield;
+        /// <summary>
+        /// Provides access to the underlying input action "Standard/MoveVertically".
+        /// </summary>
+        public InputAction @MoveVertically => m_Wrapper.m_Standard_MoveVertically;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -392,12 +425,6 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_StandardActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_StandardActionsCallbackInterfaces.Add(instance);
-            @MoveUp.started += instance.OnMoveUp;
-            @MoveUp.performed += instance.OnMoveUp;
-            @MoveUp.canceled += instance.OnMoveUp;
-            @MoveDown.started += instance.OnMoveDown;
-            @MoveDown.performed += instance.OnMoveDown;
-            @MoveDown.canceled += instance.OnMoveDown;
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
@@ -407,6 +434,12 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
             @MoveRight.started += instance.OnMoveRight;
             @MoveRight.performed += instance.OnMoveRight;
             @MoveRight.canceled += instance.OnMoveRight;
+            @Shield.started += instance.OnShield;
+            @Shield.performed += instance.OnShield;
+            @Shield.canceled += instance.OnShield;
+            @MoveVertically.started += instance.OnMoveVertically;
+            @MoveVertically.performed += instance.OnMoveVertically;
+            @MoveVertically.canceled += instance.OnMoveVertically;
         }
 
         /// <summary>
@@ -418,12 +451,6 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
         /// <seealso cref="StandardActions" />
         private void UnregisterCallbacks(IStandardActions instance)
         {
-            @MoveUp.started -= instance.OnMoveUp;
-            @MoveUp.performed -= instance.OnMoveUp;
-            @MoveUp.canceled -= instance.OnMoveUp;
-            @MoveDown.started -= instance.OnMoveDown;
-            @MoveDown.performed -= instance.OnMoveDown;
-            @MoveDown.canceled -= instance.OnMoveDown;
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
@@ -433,6 +460,12 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
             @MoveRight.started -= instance.OnMoveRight;
             @MoveRight.performed -= instance.OnMoveRight;
             @MoveRight.canceled -= instance.OnMoveRight;
+            @Shield.started -= instance.OnShield;
+            @Shield.performed -= instance.OnShield;
+            @Shield.canceled -= instance.OnShield;
+            @MoveVertically.started -= instance.OnMoveVertically;
+            @MoveVertically.performed -= instance.OnMoveVertically;
+            @MoveVertically.canceled -= instance.OnMoveVertically;
         }
 
         /// <summary>
@@ -474,20 +507,6 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
     public interface IStandardActions
     {
         /// <summary>
-        /// Method invoked when associated input action "MoveUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMoveUp(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "MoveDown" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMoveDown(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "Fire" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -508,5 +527,19 @@ public partial class @SpaceShooterInputs: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMoveRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Shield" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShield(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MoveVertically" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMoveVertically(InputAction.CallbackContext context);
     }
 }

@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bdc1f30cb966174fa220b5223b827ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
-  speed: 3
+  speed: 0.1
 --- !u!50 &-7451573329518272921
 Rigidbody2D:
   serializedVersion: 5

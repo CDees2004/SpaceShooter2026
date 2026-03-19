@@ -36,7 +36,7 @@ public class Powerup : MonoBehaviour
         if (c.gameObject.CompareTag("DespawnRange"))
         {
             Destroy(gameObject);
-            Destroy(c.gameObject);
+            //Destroy(c.gameObject);
         }
     }
 }

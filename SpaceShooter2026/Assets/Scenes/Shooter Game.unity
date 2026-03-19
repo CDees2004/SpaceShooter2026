@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 195735970}
   - component: {fileID: 195735971}
   m_Layer: 3
-  m_Name: Triangle
+  m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -389,7 +389,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 195735969}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.7045391, w: -0.70966524}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.21919826, y: 0.029788768, z: 0}
   m_LocalScale: {x: 0.6397, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -397,7 +397,7 @@ Transform:
   - {fileID: 210355479}
   - {fileID: 749500692}
   m_Father: {fileID: 786289103}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -89.585}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &195735971
 SpriteRenderer:
   serializedVersion: 2
@@ -1344,13 +1344,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535099354}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.70966524, w: 0.7045391}
-  m_LocalPosition: {x: -0.7239232, y: 0.04519338, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: -0.24, y: -0.34, z: 0}
   m_LocalScale: {x: 0.12538895, y: 0.76858485, z: 0.8975}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 786289103}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &535099356
 SpriteRenderer:
   serializedVersion: 2
@@ -1440,7 +1440,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game
   enemySpawnDelay: 3
-  powerUpDelay: 0
   enemyPrefab: {fileID: 3409777995842195204, guid: 992015109d2204d5c9a3ef2da01e8542, type: 3}
   powerupPrefab: {fileID: 7665686937186703866, guid: 07f2ea3b03915449aa7e57f1e6305b14, type: 3}
   spawnRange: {fileID: 1681509736}

@@ -42,7 +42,6 @@ public class Game : MonoBehaviour
         }
     }
 
-
     private void SpawnEnemy()
     {
         Vector3 enemySpawnPt = new Vector3(

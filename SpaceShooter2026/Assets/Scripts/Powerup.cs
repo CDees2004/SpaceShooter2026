@@ -21,7 +21,22 @@ public class Powerup : MonoBehaviour
         else if (c.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
+            Destroy(c.gameObject);
             c.gameObject.GetComponent<Player>().RefillShield();
+        }
+    }
+
+
+    // destroying the powerup if it goes off screen 
+    // note: the style I am using to implement this is different than the 
+    // above logic which was used in the demo. I am just handling this the 
+    // way which makes most sense to me 
+    private void OnTriggerEnter2D(Collider2D c)
+    {
+        if (c.gameObject.CompareTag("DespawnRange"))
+        {
+            Destroy(gameObject);
+            Destroy(c.gameObject);
         }
     }
 }

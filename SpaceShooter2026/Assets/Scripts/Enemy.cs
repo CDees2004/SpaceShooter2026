@@ -33,4 +33,14 @@ public class Enemy : MonoBehaviour
             c.gameObject.GetComponent<Player>().DamageFromEnemy();
         }
     }
+
+
+    // kill enemy if it goes off screen 
+    private void OnTriggerEnter2D(Collider2D c)
+    {
+        if (c.gameObject.CompareTag("DespawnRange"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }

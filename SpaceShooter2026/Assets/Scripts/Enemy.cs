@@ -1,22 +1,36 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
-  // set in inspector
-  public float speed;
+public class Enemy : MonoBehaviour
+{
+    // set in inspector
+    public float speed;
 
-  void Update() {
-    transform.Translate(Vector3.left * speed * Time.deltaTime);
-  }
+    void Update()
+    {
+        EnemyMovement();
+    }
 
-  private void OnCollisionEnter2D(Collision2D c) {
-    if (c.gameObject.CompareTag("Bullet")) {
-      Destroy(gameObject);
-      Destroy(c.gameObject);
-      Score.Instance.HitEnemy();
+    // basic straight line enemy movement pattern
+    private void EnemyMovement()
+    {
+        transform.Translate(Vector3.down * speed * Time.deltaTime);
+
     }
-    else if (c.gameObject.CompareTag("Player")) {
-      Destroy(gameObject);
-      c.gameObject.GetComponent<Player>().DamageFromEnemy();
+
+    // collision checks for player and bullet 
+    // called automatically by unity when collision occurs 
+    private void OnCollisionEnter2D(Collision2D c)
+    {
+        if (c.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+            Destroy(c.gameObject);
+            Score.Instance.HitEnemy();
+        }
+        else if (c.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            c.gameObject.GetComponent<Player>().DamageFromEnemy();
+        }
     }
-  }
 }

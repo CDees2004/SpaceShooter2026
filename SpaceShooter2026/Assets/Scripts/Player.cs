@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public Transform bulletSpawnPoint;
     public Slider sliderHealth;
     public Shield shield;
+    public BoxCollider2D screenBoundsLeft; 
+    public BoxCollider2D screenBoundsRight; 
 
     // private fields
     private float health;
@@ -35,8 +37,13 @@ public class Player : MonoBehaviour
         }
 
         PlayerMovement();
+        CheckBounds(); 
 
+        
+    }
 
+    public void CheckBounds()
+    {
         // keeping player on screen verically 
         if (this.transform.position.y > Y_LIMIT)
         {
@@ -46,8 +53,18 @@ public class Player : MonoBehaviour
         {
             this.transform.position = new Vector3(transform.position.x, -Y_LIMIT);
         }
-    }
 
+        // keeping player on screen horizontally 
+        if(this.transform.position.x > screenBoundsRight.bounds.max.x)
+        {
+            this.transform.position = new Vector3(transform.position.x, screenBoundsRight.bounds.max.x);
+        }
+
+        else if (this.transform.position.x < screenBoundsLeft.bounds.min.x)
+        {
+            this.transform.position = new Vector3(transform.position.x, screenBoundsLeft.bounds.max.x);
+        }
+    }
 
     // Moves the player Verically and Horizontally using Input Action System
     public void PlayerMovement()
@@ -61,7 +78,7 @@ public class Player : MonoBehaviour
         this.transform.Translate(Vector3.right * speed * Time.deltaTime * horiMove);
     }
 
- 
+
     // Reduces players health if shield is inactive
     public void DamageFromEnemy()
     {

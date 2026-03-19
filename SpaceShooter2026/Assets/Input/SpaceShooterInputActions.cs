@@ -127,6 +127,24 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""baa30bb6-67f2-4e4b-a195-f8be919f011d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SuperFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d2f4478-6bec-489e-8422-4c5a3864ce48"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -283,6 +301,50 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
                     ""action"": ""MoveHorizontally"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""50ab9c59-e8d9-4653-99e1-c6a45552538b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""d336fd2e-f71e-4775-9443-b9528d69ddd4"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SuperFire"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""ebc659e2-1204-4b09-83d5-c378d6801972"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SuperFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""503ba18a-1941-4269-8651-6c8ad6aa2d90"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SuperFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -295,6 +357,8 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
         m_Standard_MoveVertically = m_Standard.FindAction("MoveVertically", throwIfNotFound: true);
         m_Standard_Shield = m_Standard.FindAction("Shield", throwIfNotFound: true);
         m_Standard_MoveHorizontally = m_Standard.FindAction("MoveHorizontally", throwIfNotFound: true);
+        m_Standard_Pause = m_Standard.FindAction("Pause", throwIfNotFound: true);
+        m_Standard_SuperFire = m_Standard.FindAction("SuperFire", throwIfNotFound: true);
     }
 
     ~@SpaceShooterInputActions()
@@ -379,6 +443,8 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
     private readonly InputAction m_Standard_MoveVertically;
     private readonly InputAction m_Standard_Shield;
     private readonly InputAction m_Standard_MoveHorizontally;
+    private readonly InputAction m_Standard_Pause;
+    private readonly InputAction m_Standard_SuperFire;
     /// <summary>
     /// Provides access to input actions defined in input action map "Standard".
     /// </summary>
@@ -406,6 +472,14 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
         /// Provides access to the underlying input action "Standard/MoveHorizontally".
         /// </summary>
         public InputAction @MoveHorizontally => m_Wrapper.m_Standard_MoveHorizontally;
+        /// <summary>
+        /// Provides access to the underlying input action "Standard/Pause".
+        /// </summary>
+        public InputAction @Pause => m_Wrapper.m_Standard_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "Standard/SuperFire".
+        /// </summary>
+        public InputAction @SuperFire => m_Wrapper.m_Standard_SuperFire;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -444,6 +518,12 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
             @MoveHorizontally.started += instance.OnMoveHorizontally;
             @MoveHorizontally.performed += instance.OnMoveHorizontally;
             @MoveHorizontally.canceled += instance.OnMoveHorizontally;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+            @SuperFire.started += instance.OnSuperFire;
+            @SuperFire.performed += instance.OnSuperFire;
+            @SuperFire.canceled += instance.OnSuperFire;
         }
 
         /// <summary>
@@ -467,6 +547,12 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
             @MoveHorizontally.started -= instance.OnMoveHorizontally;
             @MoveHorizontally.performed -= instance.OnMoveHorizontally;
             @MoveHorizontally.canceled -= instance.OnMoveHorizontally;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+            @SuperFire.started -= instance.OnSuperFire;
+            @SuperFire.performed -= instance.OnSuperFire;
+            @SuperFire.canceled -= instance.OnSuperFire;
         }
 
         /// <summary>
@@ -535,5 +621,19 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMoveHorizontally(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SuperFire" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSuperFire(InputAction.CallbackContext context);
     }
 }

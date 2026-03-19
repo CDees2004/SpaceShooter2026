@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
     public Transform bulletSpawnPoint;
     public Slider sliderHealth;
     public Shield shield;
-    public BoxCollider2D screenBoundsLeft; 
-    public BoxCollider2D screenBoundsRight; 
+    public BoxCollider2D screenBoundsLeft;
+    public BoxCollider2D screenBoundsRight;
 
     // private fields
     private float health;
@@ -29,22 +29,31 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        sliderHealth.value = health;
-
+        sliderHealth.value = health; 
         // player attack
         if (SpaceShooterInput.Instance.input.Fire.WasPressedThisFrame())
         {
             GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        }
+        if (SpaceShooterInput.Instance.input.SuperFire.WasPressedThisFrame())
+        {
+            GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            bulletObj.GetComponent<Bullet>().speed += 2.0f; 
+            GameObject bulletObj2 = Instantiate(bulletPrefab, bulletSpawnPoint.position + Vector3.right * 0.5f, Quaternion.identity);
+            GameObject bulletObj3 = Instantiate(bulletPrefab, bulletSpawnPoint.position + Vector3.left * 0.5f, Quaternion.identity);
         }
 
         PlayerMovement();
         CheckBounds();
         // check if killed 
         if (health <= 0) SceneManager.LoadScene("GameOver");
-
-        
     }
 
+
+    /// <summary>
+    /// Checking the players position against the screen bounds to 
+    /// keep the player on screen
+    /// </summary>
     public void CheckBounds()
     {
         // keeping player on screen verically 
@@ -58,7 +67,7 @@ public class Player : MonoBehaviour
         }
 
         // keeping player on screen horizontally 
-        if(this.transform.position.x > screenBoundsRight.bounds.max.x)
+        if (this.transform.position.x > screenBoundsRight.bounds.max.x)
         {
             this.transform.position = new Vector3(transform.position.x, screenBoundsRight.bounds.max.x);
         }
@@ -68,6 +77,7 @@ public class Player : MonoBehaviour
             this.transform.position = new Vector3(transform.position.x, screenBoundsLeft.bounds.max.x);
         }
     }
+
 
     // Moves the player Verically and Horizontally using Input Action System
     public void PlayerMovement()

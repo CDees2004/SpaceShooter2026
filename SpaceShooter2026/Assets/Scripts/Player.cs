@@ -19,13 +19,16 @@ public class Player : MonoBehaviour
 
     // private fields
     private float health;
+    private AudioSource audioSource; 
     // make more robust later. Magic numbers are not good. 
     private const float Y_LIMIT = 4.6f;
 
     private void Start()
     {
         health = 1.0f;
+        audioSource = GetComponent<AudioSource>(); 
     }
+
 
     private void Update()
     {
@@ -68,12 +71,19 @@ public class Player : MonoBehaviour
         }
     }
 
+
     private void PlayerAttack()
     {
+        // normal fire 
         if (SpaceShooterInput.Instance.input.Fire.WasPressedThisFrame())
         {
             GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            // uncomment when normal fire audio clip is added 
+            //audioSource.clip = normalFire; 
+            //audioSource.Play();
         }
+        
+        // super fire 
         if (SpaceShooterInput.Instance.input.SuperFire.WasPressedThisFrame())
         {
             GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);

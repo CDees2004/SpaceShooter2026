@@ -21,7 +21,11 @@ public class Powerup : MonoBehaviour
         else if (c.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            c.gameObject.GetComponent<Player>().RefillShield();
+            // only do this if the player has not been destroyed 
+            if (c.gameObject.GetComponent<Player>() != null)
+            {
+                c.gameObject.GetComponent<Player>().RefillShield();
+            }
         }
     }
 
@@ -35,7 +39,6 @@ public class Powerup : MonoBehaviour
         if (c.gameObject.CompareTag("DespawnRange"))
         {
             Destroy(gameObject);
-            //Destroy(c.gameObject);
         }
     }
 }

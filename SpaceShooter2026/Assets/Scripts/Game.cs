@@ -7,6 +7,9 @@ public class Game : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject powerupPrefab;
     public BoxCollider2D spawnRange;
+    
+    // might use this to check if the UI is ready 
+    //public bool isReady { get; private set; }
 
 
     // private fields

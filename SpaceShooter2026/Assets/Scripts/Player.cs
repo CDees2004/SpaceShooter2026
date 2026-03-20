@@ -29,22 +29,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        sliderHealth.value = health; 
-        // player attack
-        if (SpaceShooterInput.Instance.input.Fire.WasPressedThisFrame())
-        {
-            GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-        }
-        if (SpaceShooterInput.Instance.input.SuperFire.WasPressedThisFrame())
-        {
-            GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-            bulletObj.GetComponent<Bullet>().speed += 2.0f; 
-            GameObject bulletObj2 = Instantiate(bulletPrefab, bulletSpawnPoint.position + Vector3.right * 0.5f, Quaternion.identity);
-            GameObject bulletObj3 = Instantiate(bulletPrefab, bulletSpawnPoint.position + Vector3.left * 0.5f, Quaternion.identity);
-        }
-
+        sliderHealth.value = health;
+        // player condition checks and behaviors
+        PlayerAttack(); 
         PlayerMovement();
         CheckBounds();
+
         // check if killed 
         if (health <= 0) SceneManager.LoadScene("GameOver");
     }
@@ -78,13 +68,30 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void PlayerAttack()
+    {
+        if (SpaceShooterInput.Instance.input.Fire.WasPressedThisFrame())
+        {
+            GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        }
+        if (SpaceShooterInput.Instance.input.SuperFire.WasPressedThisFrame())
+        {
+            GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            bulletObj.GetComponent<Bullet>().speed += 2.0f;
+            GameObject bulletObj2 = Instantiate(bulletPrefab, bulletSpawnPoint.position + Vector3.right * 0.5f, Quaternion.identity);
+            GameObject bulletObj3 = Instantiate(bulletPrefab, bulletSpawnPoint.position + Vector3.left * 0.5f, Quaternion.identity);
+        }
+    }
+
 
     // Moves the player Verically and Horizontally using Input Action System
-    public void PlayerMovement()
+    private void PlayerMovement()
     {
         // vertical 
         var vertMove = SpaceShooterInput.Instance.input.MoveVertically.ReadValue<float>();
         this.transform.Translate(Vector3.up * speed * Time.deltaTime * vertMove);
+        // if the movement is positive enable the particle effect 
+      
 
         // horizontal 
         var horiMove = SpaceShooterInput.Instance.input.MoveHorizontally.ReadValue<float>();

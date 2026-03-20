@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - ShieldBoost
   - DespawnRange
+  - EnemySpawnRange
   layers:
   - Default
   - TransparentFX

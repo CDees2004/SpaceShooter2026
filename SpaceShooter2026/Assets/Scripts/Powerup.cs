@@ -21,7 +21,6 @@ public class Powerup : MonoBehaviour
         else if (c.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            Destroy(c.gameObject);
             c.gameObject.GetComponent<Player>().RefillShield();
         }
     }

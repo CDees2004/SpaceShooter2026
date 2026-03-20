@@ -14,4 +14,13 @@ public class Bullet : MonoBehaviour
     {
         this.transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // if the bullet crosses the enemy spawn then destroy it
+        if (collision.gameObject.CompareTag("EnemySpawnRange"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }

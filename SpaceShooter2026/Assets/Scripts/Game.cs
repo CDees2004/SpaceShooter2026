@@ -8,12 +8,8 @@ public class Game : MonoBehaviour
     public GameObject powerupPrefab;
     public BoxCollider2D spawnRange;
 
-    // might use this to check if the UI is ready 
-    //public bool isReady { get; private set; }
-
-
     // private fields
-    private int currentSpawnRound; 
+    private int currentSpawnRound;
     private float powerUpDelay;
     private float enemySpawnTimer;
     private float powerupSpawnTimer;
@@ -46,10 +42,12 @@ public class Game : MonoBehaviour
         }
     }
 
+
     private void EnemySpawnManager()
     {
 
     }
+
 
     private void SpawnEnemy()
     {

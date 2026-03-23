@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     // make more robust later. Magic numbers are not good. 
     private const float Y_LIMIT = 4.6f;
 
+
     private void Start()
     {
         health = 1.0f;
@@ -43,10 +44,8 @@ public class Player : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// Checking the players position against the screen bounds to 
-    /// keep the player on screen
-    /// </summary>
+    // checking player's position against screen bounds 
+    // to keep them on screen 
     public void CheckBounds()
     {
         // keeping player on screen verically 

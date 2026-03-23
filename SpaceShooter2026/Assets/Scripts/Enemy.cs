@@ -5,17 +5,37 @@ public class Enemy : MonoBehaviour
     // set in inspector
     public float speed;
 
-    void Update()
+    // private attributes defining different enemy types 
+    private string movementType;
+    private float health;
+
+
+    private void Start()
     {
-        EnemyMovement();
+
     }
+
+
+    private void Update()
+    {
+        //EnemyMovement();
+        // temp fix 
+        StraightLineMovement(); 
+    }
+
 
     // basic straight line enemy movement pattern
     private void EnemyMovement()
     {
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
 
     }
+
+
+    private void StraightLineMovement()
+    {
+        transform.Translate(Vector3.down * speed * Time.deltaTime);
+    }
+
 
     // collision checks for player and bullet 
     // called automatically by unity when collision occurs 

@@ -1,11 +1,18 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UI : MonoBehaviour
+/*
+ * This file is responsible for handling the UI logic on the 
+ * StartMenu scene.
+ */
+
+public class UIMainMenu : MonoBehaviour
 {
     public Button startButtonObject;
-    public GameObject PausePanel;
+    public Button quitButtonObject;
+
 
     private void Start()
     {
@@ -16,16 +23,11 @@ public class UI : MonoBehaviour
             Button startButton = startButtonObject.GetComponent<Button>();
             startButton.onClick.AddListener(StartGame);
         }
-    }
 
-
-    private void Update()
-    {
-        if (SpaceShooterInput.Instance.input.Pause.WasPressedThisFrame() && SceneManager.GetActiveScene().name == "MainGame")
+        if(quitButtonObject != null)
         {
-            // pausing the game 
-            PausePanel.SetActive(true);
-            Time.timeScale = 0f;
+            Button quitButton = quitButtonObject.GetComponent<Button>();
+            quitButton.onClick.AddListener(QuitGame); 
         }
     }
 
@@ -34,6 +36,20 @@ public class UI : MonoBehaviour
     {
         // loading from main menu to game scene 
         SceneManager.LoadScene("MainGame");
+    }
+
+
+    private void QuitGame()
+    {
+        // hacky work around to make quitting function 
+        // while playing in the editor 
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+
+#else
+        Application.Quit(); 
+#endif
+
     }
 
 }

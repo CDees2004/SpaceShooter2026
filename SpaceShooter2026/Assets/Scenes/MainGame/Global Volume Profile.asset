@@ -83,7 +83,7 @@ MonoBehaviour:
     m_Value: 6
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.6
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -155,10 +155,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.ChromaticAberration
-  active: 1
+  active: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.713
+    m_Value: 0.358
 --- !u!114 &2093033563862678158
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e1dc532bcb41949b58bc4f2abfbb7e, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.LensDistortion
-  active: 1
+  active: 0
   intensity:
     m_OverrideState: 1
     m_Value: -0.104
@@ -208,7 +208,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.211
+    m_Value: 0.106
   smoothness:
     m_OverrideState: 1
     m_Value: 0.2

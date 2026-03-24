@@ -17,7 +17,8 @@ public class Player : MonoBehaviour
     public BoxCollider2D screenBoundsLeft;
     public BoxCollider2D screenBoundsRight;
 
-    public static int playerDamage; 
+    public static int playerDamage;
+    public static bool damageIncreased = false; 
 
     // private fields
     private static float health;
@@ -139,6 +140,7 @@ public class Player : MonoBehaviour
 
     public static void IncreaseDamage()
     {
-        playerDamage++; 
+        playerDamage++;
+        damageIncreased = true; 
     }
 }

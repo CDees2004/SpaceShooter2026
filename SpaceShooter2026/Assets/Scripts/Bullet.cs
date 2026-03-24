@@ -4,11 +4,14 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 95f;
 
+    public GameObject initialBullet;
+    public GameObject boostedBullet;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-
+        SpriteSwap(); 
     }
 
 
@@ -16,6 +19,15 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         this.transform.Translate(Vector3.up * speed * Time.deltaTime);
+    }
+
+    private void SpriteSwap()
+    {
+        if (Player.damageIncreased)
+        {
+            initialBullet.SetActive(false);
+            boostedBullet.SetActive(true); 
+        }
     }
 
 

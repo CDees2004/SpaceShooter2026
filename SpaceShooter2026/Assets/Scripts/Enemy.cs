@@ -9,18 +9,48 @@ public class Enemy : MonoBehaviour
     // doing ints as health to keep everything very simple
     public int health;
 
+    // only large enemies track 
+    public bool isTrackingEnemy = false;
+    private Transform playerTransform;
+
+    public GameObject explosionPrefab;
+
+
 
     private void Start()
     {
-
+        // finding the player object 
+        if (isTrackingEnemy)
+        {
+            GameObject playerObj = GameObject.FindWithTag("Player");
+            if (playerObj != null)
+            {
+                playerTransform = playerObj.transform;
+            }
+        }
     }
 
 
     private void Update()
     {
-        //EnemyMovement();
-        // temp fix 
-        StraightLineMovement();
+        if (isTrackingEnemy)
+        {
+            EnemyTrackingMovement();
+        }
+        else
+        {
+            StraightLineMovement();
+        }
+    }
+
+
+    private void Explode()
+    {
+        if (explosionPrefab != null)
+        {
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion, 0.5f);
+        }
     }
 
 
@@ -28,14 +58,20 @@ public class Enemy : MonoBehaviour
     {
         // give enemies +1 health every 2 rounds 
         health = 1 + (round - 1) / 2;
-        print("Health is" + health); 
+        print("Health is" + health);
     }
 
 
     // basic straight line enemy movement pattern
     private void EnemyTrackingMovement()
     {
+        if (playerTransform == null) return;
 
+        // get dir to move toward player 
+        Vector3 direction = (playerTransform.position - transform.position).normalized;
+
+        // move toward that dir 
+        transform.Translate(direction * speed * Time.deltaTime);
     }
 
 
@@ -66,6 +102,7 @@ public class Enemy : MonoBehaviour
             // them for more than their health 
             if (health <= 0)
             {
+                Explode(); 
                 Destroy(gameObject);
                 Score.Instance.HitEnemy();
                 Game.Instance.EnemyDestroyed();

@@ -35,6 +35,8 @@ public class UIGameOver : MonoBehaviour
         SceneManager.LoadScene("StartMenu"); 
     }
 
+
+
   
     // closes the application 
     private void QuitGame()

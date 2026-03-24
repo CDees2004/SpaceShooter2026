@@ -40,8 +40,8 @@ public class Game : MonoBehaviour
     private int currentSpawnedEnemies;
     private int enemySpawnCount = 10; // amount per round. This amount is multiplied by the round number
 
-    private AudioSource audioSource; 
-    public AudioClip powerupSound; 
+    private AudioSource audioSource;
+    public AudioClip powerupSound;
 
 
     private void Awake()
@@ -62,7 +62,7 @@ public class Game : MonoBehaviour
         currentSpawnedEnemies = 0;
         shopOpen = false;
 
-        audioSource = GetComponent<AudioSource>(); 
+        audioSource = GetComponent<AudioSource>();
 
         // this might not be neccesary 
         if (txtRound != null)
@@ -82,13 +82,13 @@ public class Game : MonoBehaviour
             damagePowerupButton.onClick.AddListener(ShopBuyDamage);
         }
 
-        if(healthPowerup != null)
+        if (healthPowerup != null)
         {
             Button healthPowerupButton = healthPowerup.GetComponent<Button>();
-            healthPowerupButton.onClick.AddListener(ShopBuyHealth); 
+            healthPowerupButton.onClick.AddListener(ShopBuyHealth);
         }
 
-        if(shieldPowerup != null)
+        if (shieldPowerup != null)
         {
             Button shieldPowerupButton = shieldPowerup.GetComponent<Button>();
             shieldPowerupButton.onClick.AddListener(ShopBuyShield);
@@ -99,7 +99,7 @@ public class Game : MonoBehaviour
 
         // starting a coroutine that is where our game loop is stored 
         StartCoroutine(RoundLoop());
-        StartCoroutine(SpawnMeteorsRoutine()); 
+        StartCoroutine(SpawnMeteorsRoutine());
 
     }
 
@@ -113,7 +113,7 @@ public class Game : MonoBehaviour
             SpawnPowerup();
             powerUpDelay = Random.Range(5, 10);
             powerupSpawnTimer = 0.0f;
-        } 
+        }
     }
 
 
@@ -171,7 +171,7 @@ public class Game : MonoBehaviour
             shopUI.SetActive(false);
             Time.timeScale = 1.0f;
             shopOpen = false;
-            audioSource.PlayOneShot(powerupSound); 
+            audioSource.PlayOneShot(powerupSound);
         }
 
 
@@ -183,14 +183,14 @@ public class Game : MonoBehaviour
     public void ShopBuyDamage()
     {
         Player.IncreaseDamage();
-        CloseShop(); 
+        CloseShop();
     }
 
-    
+
     public void ShopBuyHealth()
     {
         Player.RefillHealth();
-        CloseShop(); 
+        CloseShop();
     }
 
 
@@ -198,7 +198,7 @@ public class Game : MonoBehaviour
     {
         // have to do this because the method is not static
         FindFirstObjectByType<Player>().RefillShield();
-        CloseShop(); 
+        CloseShop();
     }
 
 
@@ -208,14 +208,22 @@ public class Game : MonoBehaviour
         // spawning enemy amount determined by the round number 
         for (int i = 0; i < enemySpawnCount * currentSpawnRound; i++)
         {
-            //enemySpawnTimer += Time.deltaTime;
-            //if (enemySpawnTimer >= enemySpawnDelay)
-            //{
-            SpawnEnemy();
+            // if this enemy is the last one, make him extra large 
+            if (i == (enemySpawnCount * currentSpawnRound) - 1)
+            {
+                //SpawnEnemy(3.0f);
+                GameObject giant = SpawnEnemy(3.0f);
+                giant.GetComponent<Enemy>().isTrackingEnemy = true; 
+
+            }
+            else
+            {
+                SpawnEnemy(1.0f);
+            }
+
             //enemySpawnTimer = Random.Range(0, 5);
             // waiting on an enemy spawn to complete before iterating 
             yield return new WaitForSeconds(Random.Range(1, 5));
-            //}
         }
     }
 
@@ -226,13 +234,13 @@ public class Game : MonoBehaviour
         while (true)
         {
             SpawnMeteor();
-            yield return new WaitForSeconds(Random.Range(2.0f, 10.0f)); 
+            yield return new WaitForSeconds(Random.Range(2.0f, 10.0f));
         }
     }
 
 
     // creates an enemy within the enemy spawn range 
-    private void SpawnEnemy()
+    private GameObject SpawnEnemy(float sizeMult)
     {
         Vector3 enemySpawnPt = new Vector3(
             Random.Range(spawnRange.bounds.min.x, spawnRange.bounds.max.x),
@@ -240,9 +248,14 @@ public class Game : MonoBehaviour
             0);
         GameObject enemyObj = Instantiate(enemyPrefab, enemySpawnPt, Quaternion.identity);
         Enemy enemy = enemyObj.GetComponent<Enemy>();
-        enemy.InitEnemyHealth(currentSpawnRound); 
+        enemy.InitEnemyHealth(currentSpawnRound);
+
+        // apply size multiplier 
+        enemyObj.transform.localScale *= sizeMult;
+
         // updating the spawned enemy amount 
         currentSpawnedEnemies++;
+        return enemyObj; 
     }
 
 

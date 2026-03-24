@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpaceShooterInput : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class SpaceShooterInput : MonoBehaviour
     {
         Instance = this;
         var inputActions = new SpaceShooterInputActions();
-        inputActions.Enable();
+        //inputActions.Enable();
         input = inputActions.Standard;
         input.Enable();
     }

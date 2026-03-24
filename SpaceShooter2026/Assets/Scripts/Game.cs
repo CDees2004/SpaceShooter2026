@@ -9,7 +9,7 @@ public class Game : MonoBehaviour
     public BoxCollider2D spawnRange;
 
     // private fields
-    private int currentSpawnRound;
+    private int currentSpawnRound = 1;
     private float powerUpDelay;
     private float enemySpawnTimer;
     private float powerupSpawnTimer;
@@ -29,7 +29,7 @@ public class Game : MonoBehaviour
         if (enemySpawnTimer >= enemySpawnDelay)
         {
             SpawnEnemy();
-            enemySpawnTimer = 0.0f;
+            enemySpawnTimer = Random.Range(0, 5);
         }
 
         // check spawn powerup

@@ -18,7 +18,7 @@ public class Score : MonoBehaviour {
   }
 
   void Update() {
-    txtScore.text = $"Score: {score}"; // "string interpolation"
+    txtScore.text = $"{score}"; // "string interpolation"
   }
 
   public void HitEnemy() {

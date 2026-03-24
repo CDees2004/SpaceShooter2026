@@ -9,6 +9,7 @@ TagManager:
   - ShieldBoost
   - DespawnRange
   - EnemySpawnRange
+  - Meteor
   layers:
   - Default
   - TransparentFX

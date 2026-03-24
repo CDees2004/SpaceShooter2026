@@ -33,7 +33,7 @@ public class Shield : MonoBehaviour {
       }
     }
     else {
-      protectionTime += Time.deltaTime;
+      protectionTime += Time.deltaTime / 4.0f;
       protectionTime = Mathf.Clamp(protectionTime, 0, maxProtectionTime);
       IsActive = false;
     }

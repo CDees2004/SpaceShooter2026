@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Linq.Expressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
@@ -13,6 +15,9 @@ public class Game : MonoBehaviour
     public GameObject powerupPrefab;
     public BoxCollider2D spawnRange;
 
+    public GameObject meteorPrefab;
+    public BoxCollider2D meteorSpawnRange;
+
     public float roundTextDuration = 2.0f;
 
     // private fields
@@ -20,6 +25,13 @@ public class Game : MonoBehaviour
     private float powerupSpawnTimer;
 
     public TextMeshProUGUI txtRound;
+    public GameObject shopUI;
+
+    public GameObject damagePowerup;
+    public GameObject healthPowerup;
+    public GameObject shieldPowerup;
+
+    private bool shopOpen;
 
     // enemy spawning fields 
     private float enemySpawnTimer;
@@ -45,12 +57,40 @@ public class Game : MonoBehaviour
         currentSpawnRound = 1;
         defeatedEnemies = 0;
         currentSpawnedEnemies = 0;
+        shopOpen = false;
 
         // this might not be neccesary 
         if (txtRound != null)
         {
             txtRound.gameObject.SetActive(false);
         }
+
+        if (shopUI != null)
+        {
+            shopUI.SetActive(false);
+        }
+
+        // setting up shop buttons 
+        if (damagePowerup != null)
+        {
+            Button damagePowerupButton = damagePowerup.GetComponent<Button>();
+            damagePowerupButton.onClick.AddListener(ShopBuyDamage);
+        }
+
+        if(healthPowerup != null)
+        {
+            Button healthPowerupButton = healthPowerup.GetComponent<Button>();
+            healthPowerupButton.onClick.AddListener(ShopBuyHealth); 
+        }
+
+        if(shieldPowerup != null)
+        {
+            Button shieldPowerupButton = shieldPowerup.GetComponent<Button>();
+            shieldPowerupButton.onClick.AddListener(ShopBuyShield);
+        }
+
+
+
 
         // starting a coroutine that is where our game loop is stored 
         StartCoroutine(RoundLoop());
@@ -68,6 +108,9 @@ public class Game : MonoBehaviour
             powerUpDelay = Random.Range(5, 10);
             powerupSpawnTimer = 0.0f;
         }
+
+        // spawn meteors at random 
+        //SpawnMeteor(); 
     }
 
 
@@ -90,15 +133,66 @@ public class Game : MonoBehaviour
             // waiting until all the enemies are dead to progress 
             // NOTE: need to make the check a lambda func because it requires a func as param 
             // waits until defeated enemies amount is equal to the amount spawned overall
-            int totalEnemySpawn = enemySpawnCount * currentSpawnRound; 
+            int totalEnemySpawn = enemySpawnCount * currentSpawnRound;
             yield return new WaitUntil(() => defeatedEnemies >= totalEnemySpawn);
-
-            // increment round 
-            currentSpawnRound++;
 
             // shop popup after round concludes 
             //yield return StartCoroutine(ShopPopup()); 
+            OpenShop();
+            yield return new WaitUntil(() => shopOpen == false);
+
+            // increment round 
+            currentSpawnRound++;
         }
+    }
+
+
+    private void OpenShop()
+    {
+        if (shopUI != null)
+        {
+            shopUI.SetActive(true);
+            shopOpen = true;
+            Time.timeScale = 0.0f;
+
+        }
+
+
+    }
+
+    public void CloseShop()
+    {
+        if (shopUI != null)
+        {
+            shopUI.SetActive(false);
+            Time.timeScale = 1.0f;
+            shopOpen = false;
+        }
+
+
+
+    }
+
+
+    public void ShopBuyDamage()
+    {
+        Player.IncreaseDamage();
+        CloseShop(); 
+    }
+
+    
+    public void ShopBuyHealth()
+    {
+        Player.RefillHealth();
+        CloseShop(); 
+    }
+
+
+    public void ShopBuyShield()
+    {
+        // have to do this because the method is not static
+        FindFirstObjectByType<Player>().RefillShield();
+        CloseShop(); 
     }
 
 
@@ -127,12 +221,23 @@ public class Game : MonoBehaviour
             Random.Range(spawnRange.bounds.min.x, spawnRange.bounds.max.x),
             Random.Range(spawnRange.bounds.min.y, spawnRange.bounds.max.y),
             0);
-        Instantiate(enemyPrefab, enemySpawnPt, Quaternion.identity);
+        GameObject enemyObj = Instantiate(enemyPrefab, enemySpawnPt, Quaternion.identity);
+        Enemy enemy = enemyObj.GetComponent<Enemy>();
+        enemy.InitEnemyHealth(currentSpawnRound); 
         // updating the spawned enemy amount 
         currentSpawnedEnemies++;
     }
 
 
+    // same as enemy spawning but for meteor spawns  
+    private void SpawnMeteor()
+    {
+        Vector3 meteorSpawnPt = new Vector3(
+            Random.Range(meteorSpawnRange.bounds.min.x, meteorSpawnRange.bounds.max.x),
+            Random.Range(meteorSpawnRange.bounds.min.y, meteorSpawnRange.bounds.max.y),
+            0);
+        Instantiate(meteorPrefab, meteorSpawnPt, Quaternion.identity);
+    }
 
     // the coroutine for the round UI panel pop up 
     private IEnumerator RoundPopup()
@@ -140,7 +245,7 @@ public class Game : MonoBehaviour
         if (txtRound != null)
         {
             // set the text to display the round
-            txtRound.text = $"Round {currentSpawnRound}";
+            txtRound.text = $"Round: {currentSpawnRound}";
             txtRound.gameObject.SetActive(true);
             // stopping our program to show the round for 2 seconds 
             yield return new WaitForSeconds(2.0f);

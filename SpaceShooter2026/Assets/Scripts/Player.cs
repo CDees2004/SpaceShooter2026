@@ -17,8 +17,10 @@ public class Player : MonoBehaviour
     public BoxCollider2D screenBoundsLeft;
     public BoxCollider2D screenBoundsRight;
 
+    public static int playerDamage; 
+
     // private fields
-    private float health;
+    private static float health;
     private AudioSource audioSource; 
     // make more robust later. Magic numbers are not good. 
     private const float Y_LIMIT = 4.6f;
@@ -27,7 +29,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         health = 1.0f;
-        audioSource = GetComponent<AudioSource>(); 
+        audioSource = GetComponent<AudioSource>();
+        playerDamage = 1; 
     }
 
 
@@ -42,6 +45,9 @@ public class Player : MonoBehaviour
         // check if killed 
         if (health <= 0) SceneManager.LoadScene("GameOver");
     }
+
+
+    // getter and setter
 
 
     // checking player's position against screen bounds 
@@ -122,5 +128,17 @@ public class Player : MonoBehaviour
     public void RefillShield()
     {
         shield.FullRefill();
+    }
+
+   
+    public static void RefillHealth()
+    {
+        health = 1.0f;
+    }
+
+
+    public static void IncreaseDamage()
+    {
+        playerDamage++; 
     }
 }

@@ -18,20 +18,28 @@ public class Player : MonoBehaviour
     public BoxCollider2D screenBoundsRight;
 
     public static int playerDamage;
-    public static bool damageIncreased = false; 
+    public static bool damageIncreased = false;
 
     // private fields
     private static float health;
-    private AudioSource audioSource; 
-    // make more robust later. Magic numbers are not good. 
+
+    // sounds 
+    private AudioSource audioSource;
+    public AudioClip normalFire;
+    public AudioClip superFire;
+    public AudioClip hitSound;
+    public AudioClip shieldHitSound; 
+
+
     private const float Y_LIMIT = 4.6f;
 
 
     private void Start()
     {
         health = 1.0f;
+        playerDamage = 1;
+
         audioSource = GetComponent<AudioSource>();
-        playerDamage = 1; 
     }
 
 
@@ -39,7 +47,7 @@ public class Player : MonoBehaviour
     {
         sliderHealth.value = health;
         // player condition checks and behaviors
-        PlayerAttack(); 
+        PlayerAttack();
         PlayerMovement();
         CheckBounds();
 
@@ -85,10 +93,10 @@ public class Player : MonoBehaviour
         {
             GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
             // uncomment when normal fire audio clip is added 
-            //audioSource.clip = normalFire; 
-            //audioSource.Play();
+
+            audioSource.PlayOneShot(normalFire);
         }
-        
+
         // super fire 
         if (SpaceShooterInput.Instance.input.SuperFire.WasPressedThisFrame())
         {
@@ -96,6 +104,8 @@ public class Player : MonoBehaviour
             bulletObj.GetComponent<Bullet>().speed += 2.0f;
             GameObject bulletObj2 = Instantiate(bulletPrefab, bulletSpawnPoint.position + Vector3.right * 0.5f, Quaternion.identity);
             GameObject bulletObj3 = Instantiate(bulletPrefab, bulletSpawnPoint.position + Vector3.left * 0.5f, Quaternion.identity);
+
+            audioSource.PlayOneShot(superFire);
         }
     }
 
@@ -107,7 +117,7 @@ public class Player : MonoBehaviour
         var vertMove = SpaceShooterInput.Instance.input.MoveVertically.ReadValue<float>();
         this.transform.Translate(Vector3.up * speed * Time.deltaTime * vertMove);
         // if the movement is positive enable the particle effect 
-      
+
 
         // horizontal 
         var horiMove = SpaceShooterInput.Instance.input.MoveHorizontally.ReadValue<float>();
@@ -121,7 +131,14 @@ public class Player : MonoBehaviour
         if (!shield.IsActive)
         {
             health -= 0.25f;
+            audioSource.PlayOneShot(hitSound); 
         }
+
+        else
+        {
+            audioSource.PlayOneShot(shieldHitSound);
+        }
+
     }
 
 
@@ -131,7 +148,7 @@ public class Player : MonoBehaviour
         shield.FullRefill();
     }
 
-   
+
     public static void RefillHealth()
     {
         health = 1.0f;
@@ -141,6 +158,6 @@ public class Player : MonoBehaviour
     public static void IncreaseDamage()
     {
         playerDamage++;
-        damageIncreased = true; 
+        damageIncreased = true;
     }
 }

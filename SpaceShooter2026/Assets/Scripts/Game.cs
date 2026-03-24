@@ -40,6 +40,9 @@ public class Game : MonoBehaviour
     private int currentSpawnedEnemies;
     private int enemySpawnCount = 10; // amount per round. This amount is multiplied by the round number
 
+    private AudioSource audioSource; 
+    public AudioClip powerupSound; 
+
 
     private void Awake()
     {
@@ -58,6 +61,8 @@ public class Game : MonoBehaviour
         defeatedEnemies = 0;
         currentSpawnedEnemies = 0;
         shopOpen = false;
+
+        audioSource = GetComponent<AudioSource>(); 
 
         // this might not be neccesary 
         if (txtRound != null)
@@ -166,6 +171,7 @@ public class Game : MonoBehaviour
             shopUI.SetActive(false);
             Time.timeScale = 1.0f;
             shopOpen = false;
+            audioSource.PlayOneShot(powerupSound); 
         }
 
 

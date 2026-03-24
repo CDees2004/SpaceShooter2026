@@ -1,3 +1,4 @@
+using System.Linq;
 using Unity.Burst.Intrinsics;
 using UnityEditor;
 using UnityEngine;
@@ -52,15 +53,20 @@ public class Player : MonoBehaviour
         CheckBounds();
 
         // check if killed 
-        if (health <= 0) SceneManager.LoadScene("GameOver");
-    }
+        if (health <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+            //Score.scoreHistory.Append(score);
+        }
+
+        }
 
 
     // getter and setter
 
 
-    // checking player's position against screen bounds 
-    // to keep them on screen 
+        // checking player's position against screen bounds 
+        // to keep them on screen 
     public void CheckBounds()
     {
         // keeping player on screen verically 

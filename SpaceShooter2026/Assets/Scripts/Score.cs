@@ -1,11 +1,14 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
     private TextMeshProUGUI txtScore;
     private float score;
+
+    public float[] scoreHistory; 
 
     public static Score Instance { get; private set; }
 

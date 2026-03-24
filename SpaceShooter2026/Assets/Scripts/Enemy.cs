@@ -46,11 +46,14 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
             Destroy(c.gameObject);
             Score.Instance.HitEnemy();
+            Game.Instance.EnemyDestroyed(); 
         }
+
         else if (c.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
             c.gameObject.GetComponent<Player>().DamageFromEnemy();
+            Game.Instance.EnemyDestroyed(); 
         }
     }
 
@@ -61,6 +64,7 @@ public class Enemy : MonoBehaviour
         if (c.gameObject.CompareTag("DespawnRange"))
         {
             Destroy(gameObject);
+            Game.Instance.EnemyDestroyed(); 
         }
     }
 }

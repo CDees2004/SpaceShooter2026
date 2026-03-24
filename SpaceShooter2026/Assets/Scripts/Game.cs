@@ -94,6 +94,7 @@ public class Game : MonoBehaviour
 
         // starting a coroutine that is where our game loop is stored 
         StartCoroutine(RoundLoop());
+        StartCoroutine(SpawnMeteorsRoutine()); 
 
     }
 
@@ -107,10 +108,7 @@ public class Game : MonoBehaviour
             SpawnPowerup();
             powerUpDelay = Random.Range(5, 10);
             powerupSpawnTimer = 0.0f;
-        }
-
-        // spawn meteors at random 
-        //SpawnMeteor(); 
+        } 
     }
 
 
@@ -160,6 +158,7 @@ public class Game : MonoBehaviour
 
     }
 
+
     public void CloseShop()
     {
         if (shopUI != null)
@@ -174,6 +173,7 @@ public class Game : MonoBehaviour
     }
 
 
+    // shop methods which call methods in player class 
     public void ShopBuyDamage()
     {
         Player.IncreaseDamage();
@@ -210,6 +210,17 @@ public class Game : MonoBehaviour
             // waiting on an enemy spawn to complete before iterating 
             yield return new WaitForSeconds(Random.Range(1, 5));
             //}
+        }
+    }
+
+
+    private IEnumerator SpawnMeteorsRoutine()
+    {
+        // spawning constantly throughout the game
+        while (true)
+        {
+            SpawnMeteor();
+            yield return new WaitForSeconds(Random.Range(2.0f, 10.0f)); 
         }
     }
 
